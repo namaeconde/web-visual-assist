@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import { Provider } from 'jotai';
 import { ThemeProvider } from "@material-tailwind/react";
 import { Inter } from 'next/font/google'
 import '../styles/globals.css';
@@ -13,11 +14,13 @@ const inter = Inter({ subsets: ['latin'] })
  */
 function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider>
-      <main className={inter.className}>
-        <Component {...pageProps} />
-      </main>
-    </ThemeProvider>
+    <Provider>
+      <ThemeProvider>
+        <main className={inter.className}>
+          <Component {...pageProps} />
+        </main>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

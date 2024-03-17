@@ -1,13 +1,23 @@
 import React from "react";
 import { Stepper, Step, Button, Card, CardHeader, CardBody, Typography, CardFooter, Input } from "@material-tailwind/react";
- 
+import { handleAge, handleInterests, handleLocation, handleOnboarded } from "../atoms";
+import { useAtom } from "jotai";
+
 interface CardProps {
   title: string;
   content: string;
+  input: string;
+  handleInputChange: any;
   handleClickSubmit: any;
 }
 
-export const CardDefault: React.FC<CardProps> = ({ title, content, handleClickSubmit }) => {
+export const CardDefault: React.FC<CardProps> = ({ 
+    title, 
+    content, 
+    input,
+    handleInputChange,
+    handleClickSubmit 
+  }) => {
   return (
     <Card className="mt-6 w-96">
       <CardHeader color="blue-gray" className="relative h-56">
@@ -26,7 +36,7 @@ export const CardDefault: React.FC<CardProps> = ({ title, content, handleClickSu
       </CardBody>
       <CardFooter className="pt-0">
         <div className="flex justify-center items-center">
-          <Input variant="standard" crossOrigin=""/>
+          <Input variant="standard" crossOrigin="" value={input} onChange={handleInputChange}/>
           <Button ripple={false} variant="text" onClick={() => handleClickSubmit()}>Submit</Button>
         </div>
       </CardFooter>
@@ -37,6 +47,11 @@ export const CardDefault: React.FC<CardProps> = ({ title, content, handleClickSu
 export const OnboardingSection: React.FC = () => {
   const [activeSection, setActiveSection] = React.useState(0);
   const [isLastStep, setIsLastStep] = React.useState(false);
+  const [age, updateAge] = useAtom(handleAge);
+  const [interests, updateInterests] = useAtom(handleInterests);
+  const [location, updateLocation] = useAtom(handleLocation);
+  const [, markAsOnboarded] = useAtom(handleOnboarded);
+
   const handleNext = () => !isLastStep && setActiveSection((cur) => cur + 1);
 
   return (
@@ -55,18 +70,28 @@ export const OnboardingSection: React.FC = () => {
             <CardDefault 
               title="Age" 
               content="Please provide your age for statistical purposes only. Must be 18 or older." 
+              input={age}
+              handleInputChange={updateAge}
               handleClickSubmit={handleNext}
             /> :
           activeSection === 1 ?
             <CardDefault
               title="Interests" 
               content="Please share your interests or hobbies with us. We'd love to know more about what you enjoy doing in your free time." 
+              input={interests}
+              handleInputChange={updateInterests}
               handleClickSubmit={handleNext}
             /> :
             <CardDefault 
               title="Location" 
               content="Where are you located?" 
-              handleClickSubmit={handleNext}
+              input={location}
+              handleInputChange={updateLocation}
+              handleClickSubmit={() => {
+                handleNext();
+                setIsLastStep(true);
+                markAsOnboarded();
+              }}
             />
         }
         </div>
