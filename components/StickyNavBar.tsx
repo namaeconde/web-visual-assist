@@ -36,7 +36,6 @@ export const StickyNavbar: React.FC<NavbarProps> = ({
                     variant="small"
                     color="blue-gray"
                     className="p-1 font-normal"
-                    placeholder=""
                     key={`index-${index}`}
                   >
                     <a href="#" className="flex items-center">
@@ -53,13 +52,12 @@ export const StickyNavbar: React.FC<NavbarProps> = ({
   }
  
   return (
-    <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4" placeholder="">
+    <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           href="#"
           className="mr-4 cursor-pointer py-1.5 font-medium"
-          placeholder=""
         >
           Simple Website
         </Typography>
@@ -67,20 +65,18 @@ export const StickyNavbar: React.FC<NavbarProps> = ({
           <NavList />
           <div className="flex items-center gap-x-1">
             <Button
-              variant="gradient"
-              size="sm"
-              className="hidden lg:inline-block"
-              placeholder=""
-            >
-              <span>Sign up</span>
-            </Button>
-            <Button
               variant="text"
               size="sm"
               className="hidden lg:inline-block"
-              placeholder=""
             >
               <span>Log In</span>
+            </Button>
+            <Button
+              variant="gradient"
+              size="sm"
+              className="hidden lg:inline-block"
+            >
+              <span>Sign up</span>
             </Button>
           </div>
           <IconButton
@@ -88,7 +84,6 @@ export const StickyNavbar: React.FC<NavbarProps> = ({
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
             ripple={false}
             onClick={() => setOpenNav(!openNav)}
-            placeholder=""
           >
             {openNav ? (
               <svg
@@ -126,10 +121,10 @@ export const StickyNavbar: React.FC<NavbarProps> = ({
       <Collapse open={openNav}>
         <NavList />
         <div className="flex items-center gap-x-1">
-          <Button fullWidth variant="text" size="sm" className="" placeholder="">
+          <Button fullWidth variant="text" size="sm" className="">
             <span>Log In</span>
           </Button>
-          <Button fullWidth variant="gradient" size="sm" className="" placeholder="">
+          <Button fullWidth variant="gradient" size="sm" className="">
             <span>Sign in</span>
           </Button>
         </div>
