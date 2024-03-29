@@ -9,7 +9,15 @@ The goal is to explore the capabilities of AI in creating tailored and engaging 
 
 ## Getting Started
 
+### Create .env.local file
+
+Add the following to your .env.local file
+```bash
+NEXT_PUBLIC_CLAUDE_API_KEY=replace-with-your-public-key
+```
+
 ### Install dependencies
+
 ```bash
 npm install
 ```
