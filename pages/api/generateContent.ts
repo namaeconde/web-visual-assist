@@ -23,7 +23,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const prompt = `Generate a personalized content for a person who is ${userAge} years old in ${userLocation} and loves ${userHobby}. 
       The content should be related to finance that is engaging, informative, and tailored to their interests.
       Do not mention the person's age, location, or hobby.
-      Please format the content with HTML tags.`;
+      Please format the content in json with "title", "body" and "section". 
+      Start your response with the json formatted content, enclose entire response in {}.`;
 
       const response = await anthropic.messages.create({
         model: 'claude-3-opus-20240229',
@@ -33,8 +34,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         ]
       });
 
-      const generatedContent = response.content.at(0)?.text
-      res.status(200).json({ content: generatedContent });
+      const generatedContent = response.content.at(0)?.text;
+      const content = JSON.parse(generatedContent || '{}');
+      res.status(200).json({ content });
     } catch (error) {
       console.error('Error generating content:', error);
       res.status(500).json({ error: 'Failed to generate content' });
