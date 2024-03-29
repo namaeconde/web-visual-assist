@@ -22,7 +22,7 @@ export const CardDefault: React.FC<CardProps> = ({
     <Card className="mt-6 w-96">
       <CardHeader color="blue-gray" className="relative h-56">
         <img
-          src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+          src={`https://source.unsplash.com/random/?${title}&auto=format&fit=crop&w=800&q=80`}
           alt="card-image"
         />
       </CardHeader>
@@ -71,7 +71,7 @@ export const OnboardingSection: React.FC = () => {
               title="Age" 
               content="Please provide your age for statistical purposes only. Must be 18 or older." 
               input={age}
-              handleInputChange={updateAge}
+              handleInputChange={(event: React.ChangeEvent<HTMLInputElement>) => updateAge(event.target.value)}
               handleClickSubmit={handleNext}
             /> :
           activeSection === 1 ?
@@ -79,14 +79,14 @@ export const OnboardingSection: React.FC = () => {
               title="Interests" 
               content="Please share your interests or hobbies with us. We'd love to know more about what you enjoy doing in your free time." 
               input={interests}
-              handleInputChange={updateInterests}
+              handleInputChange={(event: React.ChangeEvent<HTMLInputElement>) => updateInterests(event.target.value)}
               handleClickSubmit={handleNext}
             /> :
             <CardDefault 
               title="Location" 
               content="Where are you located?" 
               input={location}
-              handleInputChange={updateLocation}
+              handleInputChange={(event: React.ChangeEvent<HTMLInputElement>) => updateLocation(event.target.value)}
               handleClickSubmit={() => {
                 handleNext();
                 setIsLastStep(true);
