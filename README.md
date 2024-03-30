@@ -32,7 +32,7 @@ npm run dev
 * [Nextjs][nextjslink] - The web framework used
 * [Material Tailwindcss][materialtailwindlink] - The tailwind css web framework used
 * [Anthropic API][anthropiclink] - The AI used for content generation
-
+* [Jotai][jotailink] - The react state management used for user onboarding status updates
 ## Authors
 
 * **Namae Conde** - *Initial work* - [namaeconde][githublink]
@@ -41,3 +41,4 @@ npm run dev
 [nextjslink]: https://nextjs.org/docs
 [materialtailwindlink]: https://www.material-tailwind.com/docs/react/installation
 [anthropiclink]: https://docs.anthropic.com/claude/reference/getting-started-with-the-api
+[jotailink]: https://jotai.org/docs/introduction
