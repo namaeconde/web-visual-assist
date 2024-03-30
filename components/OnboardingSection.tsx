@@ -1,7 +1,11 @@
+'use client';
+
 import React from "react";
 import { Stepper, Step, Button, Card, CardHeader, CardBody, Typography, CardFooter, Input } from "@material-tailwind/react";
 import { handleAge, handleInterests, handleLocation, handleOnboarded } from "../atoms";
 import { useAtom } from "jotai";
+import Image from "next/image";
+import { useChat } from "ai/react";
 
 interface CardProps {
   title: string;
@@ -9,6 +13,7 @@ interface CardProps {
   input: string;
   handleInputChange: any;
   handleClickSubmit: any;
+  submit?: boolean;
 }
 
 export const CardDefault: React.FC<CardProps> = ({ 
@@ -16,14 +21,18 @@ export const CardDefault: React.FC<CardProps> = ({
     content, 
     input,
     handleInputChange,
-    handleClickSubmit 
+    handleClickSubmit,
+    submit
   }) => {
   return (
     <Card className="mt-6 w-96">
       <CardHeader color="blue-gray" className="relative h-56">
-        <img
+        <Image
+          priority
           src={`https://source.unsplash.com/random/?${title}&auto=format&fit=crop&w=800&q=80`}
           alt="card-image"
+          width={800}
+          height={55}
         />
       </CardHeader>
       <CardBody>
@@ -37,7 +46,9 @@ export const CardDefault: React.FC<CardProps> = ({
       <CardFooter className="pt-0">
         <div className="flex justify-center items-center">
           <Input variant="standard" crossOrigin="" value={input} onChange={handleInputChange}/>
-          <Button ripple={false} variant="text" onClick={() => handleClickSubmit()}>Submit</Button>
+          <Button type={ submit ? "submit" : "button" }
+                  ripple={false} variant="text" 
+                  onClick={(event) => handleClickSubmit(event)}>{ submit ? "Submit" : "Next" }</Button>
         </div>
       </CardFooter>
     </Card>
@@ -83,17 +94,18 @@ export const OnboardingSection: React.FC = () => {
               handleClickSubmit={handleNext}
             /> :
             <CardDefault 
-              title="Location" 
-              content="Where are you located?" 
-              input={location}
-              handleInputChange={(event: React.ChangeEvent<HTMLInputElement>) => updateLocation(event.target.value)}
-              handleClickSubmit={() => {
-                handleNext();
-                setIsLastStep(true);
-                markAsOnboarded();
-              }}
-            />
-        }
+                title="Location" 
+                content="Where are you located?" 
+                input={location}
+                handleInputChange={(event: React.ChangeEvent<HTMLInputElement>) => updateLocation(event.target.value)}
+                handleClickSubmit={() => {
+                  handleNext();
+                  setIsLastStep(true);
+                  markAsOnboarded();
+                }}
+                submit={true}
+              />
+          }
         </div>
       </div>
     </div>

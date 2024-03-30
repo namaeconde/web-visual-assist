@@ -5,6 +5,7 @@ import {
   CardFooter,
   Typography,
 } from "@material-tailwind/react";
+import Image from "next/image";
 
 export interface SectionCardProps {
   title: string;
@@ -24,7 +25,7 @@ export const SectionCard: React.FC<SectionCardProps> = ({
         color="transparent"
         className="m-0 rounded-none h-56"
       >
-        <img
+        <Image
           src={`https://source.unsplash.com/random/?${title}&1&auto=format&fit=crop&w=1471&q=80`}
           alt={title}
         />
